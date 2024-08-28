@@ -22,9 +22,11 @@ runs:
         #echo "Hello ${{ inputs.name}}"
         echo "Hello $NAME"
         # echo "my_output=some_value" >> $GITHUB_OUTPUT
+      shell: bash
         
     - name: count length of name
-      id: name_length
+      id: length_calculation
+      shell: bash
       run: |
        name=${{inputs.name}}
        length=${#name}
