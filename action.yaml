@@ -1,0 +1,35 @@
+name: Hello world
+description: greet person
+inputs:
+  name:
+    description: Name of the person
+    required: true
+    #default: dummy
+
+outputs:
+  name_length:
+    description: length of provided name
+    value: ${{ steps.length.outputs.name_length  }}
+
+runs:
+  using: composite
+  steps:
+    - name: echo input name
+      # id: my_step
+      env: 
+        NAME:  ${{ inputs.name}}
+      run: |
+        #echo "Hello ${{ inputs.name}}"
+        echo "Hello $NAME"
+        # echo "my_output=some_value" >> $GITHUB_OUTPUT
+        
+    - name: count length of name
+      id: name_length
+      run: |
+       name=${{inputs.name}}
+       length=${#name}
+
+       echo "name_length=$length" >> $GITHUB_OUTPUT
+      
+      
+    
